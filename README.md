@@ -18,7 +18,7 @@ This project, conducted in collaboration with Councilor Ben Weber, investigates 
 - How does tree canopy *height* change by ownership type (2014–2019)?
 
 ## Technical Architecture
-The analysis was done on one primary question(How can we distinguish between public and privately owned tree canopy in Boston using geospatial data and land use classifications?) and six supplementary questions listed above. The analysis for all questions was done in either excel or code in a Jupyter Notebook file. The various CSV files used to code are contained in the datasets folder that houses the data we used and classified for this project. We primarily used Python and Pandas were the primary tools, but for visualizing a dashboard we used Looker Studio, which will soon be available and uploaded. 
+The analysis was done on one primary question(How can we distinguish between public and privately owned tree canopy in Boston using geospatial data and land use classifications?) and six supplementary questions listed above. The analysis for all questions was done in either excel or code in a Jupyter Notebook file. The various CSV files used to code are contained in the datasets folder that houses the data we used and classified for this project. We primarily used Python and Pandas, but for visualizing a dashboard we used Looker Studio, which will soon be available and uploaded. Additional geospatial files must be opened on a computer that has ArcGIS Pro downloaded.
 
 ## How to Run
 Download a recent version of Python, download Jupyter after Python has been installed. You can download Anaconda or use Google Colab to clone the project, run all cells and the notebook should generate all analysis. If there is a missing package, add a 'pip install' to the top line of the .ipynb file and re-run all following cells.
@@ -91,7 +91,7 @@ For public vs private tree canopy we calculated:
 | **ROW Classification** | 2019 data lacked clear public/private ROW labeling — solution: aggregate ROW data separately|
 | **Looker Studio Limits** | Some datasets (e.g., environmental justice CSV) failed to render due to Looker Studio size restrictions |
 | **GitHub Upload Limits** | Large geospatial datasets exceeded GitHub’s file size limits — requires external linking or compression |
-| **ArcGIS Pro Limits** | ArcGIS Pro is only compatible with Windows. Any geospatial files should be opened using a computer with ArcGIS Pro downloaded. |
+| **ArcGIS Pro Limits** | ArcGIS Pro is only compatible with Windows. Any geospatial files in this repository should be opened using a computer with ArcGIS Pro downloaded. |
 
 ## Next Steps
 Future teams can work on:
