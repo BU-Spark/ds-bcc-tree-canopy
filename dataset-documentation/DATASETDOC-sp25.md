@@ -220,7 +220,7 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
   * The Tree Canopy Metrics uses 2019 parcels, while Citywide Land Audit data is from 2022, meaning ownership might have changed.
 
 * Are there tasks for which the dataset should not be used? If so, please provide a description.
-  * None
+  * This dataset only covers 2019 tree canopy in depth. While 2014 tree canopy can be observed in the dataset Tree Canopy Change Metrics, the focus of the dataset is to take the absolute difference in tree canopy between 2014 and 2019. 
 
 
 *Distribution*
