@@ -211,16 +211,26 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
 
 * What tasks has the dataset been used for so far? Please provide a description.   
   * The Citywide land audit dataset has been used to distinguish between city-owned and non-city owned parcels of land by considering all Parcel ID'S in the dataset to be owned by the City of Boston, or its related agencies. By doing so, we were able to calculate the percentage of tree canopy protected vs not protected by the tree ordinance. 
-  In addition, the Tree Canopy Metrics and Tree Canopy Change data was used to calculate tree canopy coverage across neighborhoods and land use types, trends in tree canopy loss or gain (2014-2019) for city-owned and non-city owned areas, areas with the highest potential for expanding tree canopy, and disparities in tree canopy coverage in neighborhoods using the columns provided in the dataset.
+  In addition, the Tree Canopy Metrics and Tree Canopy Change data was used to calculate tree canopy coverage across neighborhoods and land use types, trends in tree canopy loss or gain (2014-2019) for city-owned and non-city owned areas, areas with the highest potential for expanding tree canopy, and disparities in tree canopy coverage in neighborhoods using the columns provided in the dataset. These datasets were also used to calculate tree canopy percentages by neighborhood and by land use, estimate potential areas for expanding tree canopy (categorized by public, private, and ROW) and evaluate inequities in tree canopy coverage across neighborhoods, particularly in marginalized communities using environmental justice (EJ) data.
+
 * What (other) tasks could the dataset be used for?  
   * The dataset can be used to do further analysis by utilizing other datasets that contain information on publicly vs privately owned roads in order to further distinguish all land in Boston that is protected by the ordinance. Population datasets can be combined with these datasets to understand how much tree canopy there is in densely populated areas and determine if there are disparities in tree canopy for communities. 
+  * Understanding trends between 2019 data and the newly collected 2024 LIDAR data that will be published 
+  * Support policy evaluation by assessing how the tree ordinance impacted canopy growth.
+  * Identifying heat islands or air quality issues that could be associated with areas with low canopy for public health initiatives.
+  * Planning urban tree canopy growth projects by highlighting areas of with high potential but low current coverage
+
+
+
 * Is there anything about the composition of the dataset or the way it was collected and preprocessed/cleaned/labeled that might impact future uses?   
   * The tree canopy area is already aggregated in the datasets as US Survey Feet units, but if someone wanted to use a different map units or different aggregation of land parcels from a different year, the geographic metrics would most likely have to be recalculated. For example, existing tree canopy, canopy gain/loss, and potential canopy area would all need to be recalculated if you wanted to use the 2022 version of parcels. 
   * In the Tree Canopy Metrics Parcels dataset, the ROW (Right of Way) areas were grouped together without detailed ownership breakdowns, affecting fine-grained analysis.
   * The Tree Canopy Metrics uses 2019 parcels, while Citywide Land Audit data is from 2022, meaning ownership might have changed.
 
 * Are there tasks for which the dataset should not be used? If so, please provide a description.
-  * This dataset only covers 2019 tree canopy in depth. While 2014 tree canopy can be observed in the dataset Tree Canopy Change Metrics, the focus of the dataset is to take the absolute difference in tree canopy between 2014 and 2019. 
+  * This dataset only covers 2019 tree canopy in depth. While 2014 tree canopy can be observed in the dataset Tree Canopy Change Metrics, the focus of the dataset is to take the absolute difference in tree canopy between 2014 and 2019. This is historical data and does not reflect current canopy.
+  * Due to changes in parcel ownership, the data is an outdated source of truth. 
+  * The dataset is also limited to classifying tree canopy area, but not necessarily the specific center point where trees are physically planted due to the limitations of LIDAR scans. 
 
 
 *Distribution*
@@ -234,6 +244,9 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
   * Yes, there are many other datasets that can be used to enrich the analysis that can be done in support of extending the tree ordinance to non-city owned trees, such as data on population density to determine if there are disparities in which residential areas have the most tree canopy coverage. Also, parks highly skew the dataset in neighborhoods like Jamaica Plains, which can be accounted for more in future analysis/questions. 
   
   * In addition, our method to distinguish between city-owned and non-city owned trees using the [Citywide Land Audit](https://www.boston.gov/housing/citywide-land-audit) had some short comings as there were parcel differences between the audit and the Tree Canopy Metric datasets, which meant that 34 parcels that were in the audit were not captured in our analysis of tree canopy gain/loss or potential tree canopy area because we didn't have the geospatial datasets to be able to recalculate those metrics. A future team could work on a methodology to reconcile these parcel differences or obtain the raw geospatial files from Analyze Boston to retrace how the Tree Canopy Metrics dataset did calculate gain/loss and potential tree canopy area fields from the LIDAR scans.  
+
+  * Current mechanisms: GitHub repository (with README, DATASETDOC.md, and Jupyter Notebooks) is already set up for version control and collaboration.Others could fork the GitHub repository to add newer data (e.g., post-2019 tree canopy layers). They can correct ownership classifications as updated data becomes available. They could also integrate additional datasets like newer EJ communities files, future canopy assessments, or population data.
+
 
 *Other*
 
