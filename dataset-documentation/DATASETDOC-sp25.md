@@ -41,13 +41,13 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
 
 * Please provide a link to any data dictionaries for the datasets in this project. If one does not exist, please create a data dictionary for the datasets used in this project. **(Example of data dictionary)**  
     * https://data.boston.gov/dataset/canopy-change-assessment-data-dictionary
+    * https://github.com/BU-Spark/ds-bcc-tree-canopy/tree/dev/data/DATA_DICTIONARY.md
 * What keywords or tags would you attach to the data set?  
   * Domain(s) of Application: Computer Vision, Object Detection, OCR, Image Classification, Image Segmentation, Facial Recognition, NLP, Topic Modeling, Sentiment Analysis, Named Entity Recognition, Text Classification, Summarization, Anomaly Detection, Other
     * Geospatial Mapping/Analysis
     * potential for Text Classification in next steps.
   * Sustainability, Health, Civic Tech, Voting, Housing, Policing, Budget, Education, Transportation, etc.
-    * Sustainability
-    * Environmental Preservation
+    * Sustainability, Environmental Preservation, Environmental Justice, Urban Forestry, Equity
 
 *The following questions pertain to the datasets you used in your project.*   
 *Motivation* 
@@ -112,6 +112,17 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
        'TC_ID_12', 'VALUE_0', 'TC_E_A', 'TC_Pv_A', 'TC_Land_A', 'TC_Pi_A',
        'TC_P_A', 'TC_E_P', 'TC_Pv_P', 'TC_P_P', 'TC_Pi_P', 'Shape__Area',
        'Shape__Length'
+
+**EJ Communities Dataset**
+
+| Field               | Type   | Description                                                                                          |
+|---------------------|--------|------------------------------------------------------------------------------------------------------|
+| Name                | String | Neighborhood name (e.g., Dorchester, Roxbury)                                                        |
+| Canopy_pct          | Float  | Percent of land area under tree canopy                                                               |
+| SV_key_nb           | Float  | Composite Vulnerability Score: average of LowIncome_pct, LEP_pct, Disability_pct                     |
+| LowIncome_pct       | Float  | % of households below the poverty line                                                               |
+| LEP_pct             | Float  | % of residents with Limited English Proficiency                                                      |
+| Disability_pct      | Float  | % of residents reporting a disability                                                                |
 
 
 * Is there any information missing from individual instances? If so, please provide a description, explaining why this information is missing (e.g., because it was unavailable). This does not include intentionally removed information, but might include redacted text.   
@@ -199,6 +210,12 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
 
 * Was any preprocessing/cleaning/labeling of the data done (e.g., discretization or bucketing, tokenization, part-of-speech tagging, SIFT feature extraction, removal of instances, processing of missing values)? If so, please provide a description. If not, you may skip the remaining questions in this section.   
   * We only labeled the polygon representing right-of-way to have a "PID" and "OWNER" equal to "ROW" because we wanted to distinguish it as a its own category outside of city vs non-city owned because there are both publicly and privately owned streets that we cannot distinguish between yet with our given data. 
+  * To utilize the Citywide Land Audit, we used a series of spatial joins and overlay intersections to classify polygons of canopy as city owned and non-city owned. This file is located in the Google Drive](https://drive.google.com/file/d/1PXy_gCq0qiHonpmPounpgT8sgUCpyZrE/view?usp=drive_link).
+
+  * For the Environmental Justice Communities Analysis: 
+    * **Sources**: SVI data from City of Boston; canopy metrics from Boston Open Data  
+    * **Cleaning**: Joined in Python notebook (`EJ_Weber_CT.ipynb`); computed `SV_key_nb`  
+    * **Export**: GeoJSON published in ArcGIS Online; CSV via Data → Export → CSV  
 * Were any transformations applied to the data (e.g., cleaning mismatched values, cleaning missing values, converting data types, data aggregation, dimensionality reduction, joining input sources, redaction or anonymization, etc.)? If so, please provide a description. 
   * The PID needed to be converted to a string data type to ensure that any 10-digit codes that started with a 0 were read in properly. The column 'ownership' was created in order to distinguish between city-owned and non-city owned parcels of land. We classified based on whether the column "OWNER" fit our definition of city-owned, which can be found in our analysis_for_question_1_3_4.ipynb in our Github under question 1.
   * In order to recalculated the geometry of tree canopy polygons and classify their ownership, we had to perform a series of spatial joins and overlay intersect functions, which can be found in the ArcGIS Pro file in our [Google Drive](https://drive.google.com/file/d/1PXy_gCq0qiHonpmPounpgT8sgUCpyZrE/view?usp=drive_link) Raw Data folder. However, this file was mainly used for preprocessing instead of visualization and can only be opened on a computer that has ArcGIS Pro downloaded, which requires Windows. 
