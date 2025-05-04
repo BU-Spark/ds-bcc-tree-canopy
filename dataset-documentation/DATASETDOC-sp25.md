@@ -1,3 +1,68 @@
+# Dataset Documentation (SP25)
+
+## Project Information
+
+**Project Name**  
+City Councilor Benjamin Weber: Boston Tree Canopy Equity
+
+**GitHub Repository**  
+https://github.com/BU-Spark/ds-bcc-tree-canopy
+
+**Google Drive Folder**  
+Spark!-owned folder  
+https://drive.google.com/drive/folders/1B718VdWHsRmir2jxxE4EMXRKt5ThdJ7w?usp=drive_link
+
+**Project Description**  
+This project assesses whether more socially vulnerable Boston neighborhoods systematically have less tree canopy. We built an interactive ArcGIS map, exportable data & data dictionary, and a composite vulnerability score to highlight environmental inequities.
+
+**Client**  
+Councilor Ben Weber
+
+**Client Contacts**  
+- Bonnie DeLaune, bonnie.delaune@boston.gov  
+- Jordan Frias, jordan.frias@boston.gov  
+
+**Course**  
+DS539 Spark! Data Science X-Lab Practicum
+
+## Dataset Information
+
+**Datasets Used**  
+- Canopy Change Assessment: Parcels Tree Canopy Metrics (ArcGIS Open Data)  
+- Climate Ready Boston: Social Vulnerability (City of Boston Open Data)  
+
+**Derived Datasets**  
+- Boston_Neighborhoods_SVscore_Canopy.geojson  
+- data/neighborhood_tree_canopy_stats.csv  
+
+**Data Dictionary**  
+See `data/DATA_DICTIONARY.md`  
+
+**Keywords / Tags**  
+Geospatial, Environmental Justice, Urban Forestry, Equity, GIS, Sustainability
+
+## Dataset Details
+
+| Field               | Type   | Description                                                                                          |
+|---------------------|--------|------------------------------------------------------------------------------------------------------|
+| Name                | String | Neighborhood name (e.g., Dorchester, Roxbury)                                                        |
+| Canopy_pct          | Float  | Percent of land area under tree canopy                                                               |
+| SV_key_nb           | Float  | Composite Vulnerability Score: average of LowIncome_pct, LEP_pct, Disability_pct                     |
+| LowIncome_pct       | Float  | % of households below the poverty line                                                               |
+| LEP_pct             | Float  | % of residents with Limited English Proficiency                                                      |
+| Disability_pct      | Float  | % of residents reporting a disability                                                                |
+
+## Collection & Processing
+
+- **Sources**: SVI data from City of Boston; canopy metrics from Boston Open Data  
+- **Cleaning**: Joined in Python notebook (`EJ_Weber_CT.ipynb`); computed `SV_key_nb`  
+- **Export**: GeoJSON published in ArcGIS Online; CSV via Data → Export → CSV  
+
+## Usage & Next Steps
+
+- **Current**: Interactive map + charts illustrating inequity patterns  
+- **Future**: Guide tree-planting prioritization; inform policy reports  
+=======
 ***Project Information*** 
 
 * What is the project name? 
@@ -44,10 +109,9 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
     * https://github.com/BU-Spark/ds-bcc-tree-canopy/tree/dev/data/DATA_DICTIONARY.md
 * What keywords or tags would you attach to the data set?  
   * Domain(s) of Application: Computer Vision, Object Detection, OCR, Image Classification, Image Segmentation, Facial Recognition, NLP, Topic Modeling, Sentiment Analysis, Named Entity Recognition, Text Classification, Summarization, Anomaly Detection, Other
-    * Geospatial Mapping/Analysis
+   * Geospatial Mapping/Analysis
     * potential for Text Classification in next steps.
   * Sustainability, Health, Civic Tech, Voting, Housing, Policing, Budget, Education, Transportation, etc.
-    * Sustainability, Environmental Preservation, Environmental Justice, Urban Forestry, Equity
 
 *The following questions pertain to the datasets you used in your project.*   
 *Motivation* 
@@ -70,8 +134,8 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
 
   * The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bostonopendata-boston.opendata.arcgis.com/datasets/boston::canopy-change-assessment-tree-canopy-change-metrics/explore?layer=8&location=42.312109%2C-71.032757%2C11.72) dataset has instances that represent property at a parcel level, which essentially represents a specific piece of property that a person, entity, or organization owns, such as a home. Each instance contains further information about each piece of property. 
   * Tree_Canopy_Height_Change_2014_to_2019 dataset has instances that include:
-    * A unique identifier for each (OBJECTID)
-    * Each instance is classified as having either “Gain”, “Loss”, or “No Change” in tree canopy height from 2014 to 2019 (Class_name)
+   * A unique identifier for each (OBJECTID)
+   * Each instance is classified as having either “Gain”, “Loss”, or “No Change” in tree canopy height from 2014 to 2019 (Class_name)
     * Tree canopy height in 2019 (CanHghtT2)
     * Tree canopy height in 2014 (CanHghtT1)
     * (Shape_Leng), (ShapeSTArea), (ShapeSTLength) are geospatial features to be used in GIS analysis
@@ -137,13 +201,13 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
   * The dataset does not refer to external resources. It's geospatial data collected using LIDAR by the Boston Parks and Recreation Department.
   * Are there guarantees that they will exist, and remain constant, over time;  
   
-    * As far as we know, the dataset should remain available on Analyze Boston. 
+   * As far as we know, the dataset should remain available on Analyze Boston. 
   * Are there official archival versions of the complete dataset (i.e., including the external resources as they existed at the time the dataset was created)?  
   
-    * No
+   * No
   * Are there any restrictions (e.g., licenses, fees) associated with any of the external resources that might apply to a dataset consumer? Please provide descriptions of all external resources and any restrictions associated with them, as well as links or other access points as appropriate.   
 
-    * None of the datasets have restrictions. However, ArcGIS Pro was integral to being able to analyze the geospatial files available. 
+   * None of the datasets have restrictions. However, ArcGIS Pro was integral to being able to analyze the geospatial files available. 
 * Does the dataset contain data that might be considered confidential (e.g., data that is protected by legal privilege or by doctor-patient confidentiality, data that includes the content of individuals’ non-public communications)? If so, please provide a description.   
 
   * None of the datasets have confidential information. All data was made publicly available by Analyze Boston. 
@@ -269,4 +333,3 @@ The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public
 
 * Is there any other additional information that you would like to provide that has not already been covered in other sections?
   * None
-

@@ -1,0 +1,3 @@
+This Excel file shows my calculations for calculating existing tree canopy coverage by land use. 
+I used the Tree Canopy Change Metrics 2014‑2019 and categorized by LU. 
+Each Land Use's existing tree canopy was calculated by summing TC_E_A and TC_Land_A for every land-use group, then calculated canopy coverage with: Canopy%  = (sum of TC_E_A) ÷ (sum of TC_Land_A) × 100. 
