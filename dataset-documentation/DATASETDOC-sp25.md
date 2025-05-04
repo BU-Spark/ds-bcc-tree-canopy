@@ -88,6 +88,7 @@ Geospatial, Environmental Justice, Urban Forestry, Equity, GIS, Sustainability
 
 * What data sets did you use in your project? Please provide a link to the data sets, this could be a link to a folder in your GitHub Repo, Spark\! owned Google Drive Folder for this project, or a path on the SCC, etc.  
     * https://github.com/BU-Spark/ds-bcc-tree-canopy/tree/dev/datasets
+    * https://drive.google.com/drive/folders/1FEWEYNu06IH8EFCK7HiTExHoQ44nwiZR?usp=drive_link
 
 For this project, a number of different datasets were used to answer each of the question. These are links for where to access the data for download.
 
@@ -98,18 +99,19 @@ The [Canopy Change Assessment: Neighborhoods Tree Canopy Metrics](https://boston
 
 The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bostonopendata-boston.opendata.arcgis.com/maps/boston::canopy-change-assessment-tree-canopy-change-metrics/about) dataset has instances that represent property at a parcel level, which essentially represents a specific piece of property that a person, entity, or organization owns. This dataset differs from the [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bostonopendata-boston.opendata.arcgis.com/datasets/boston::canopy-change-assessment-tree-canopy-change-metrics/explore?layer=8&location=42.312109%2C-71.032757%2C11.72) becuase it contains columns that have tree canopy gain and loss between the years of 2014 and 2019.
 
+The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public1) dataset has instance that represent parcels that are owned by the City of Boston and it's quasi-agencies. 
+
 [EJ Communities Data (CoB)](https://data.boston.gov/dataset/climate-ready-boston-social-vulnerability)
 
 
 * Please provide a link to any data dictionaries for the datasets in this project. If one does not exist, please create a data dictionary for the datasets used in this project. **(Example of data dictionary)**  
     * https://data.boston.gov/dataset/canopy-change-assessment-data-dictionary
+    * https://github.com/BU-Spark/ds-bcc-tree-canopy/tree/dev/data/DATA_DICTIONARY.md
 * What keywords or tags would you attach to the data set?  
   * Domain(s) of Application: Computer Vision, Object Detection, OCR, Image Classification, Image Segmentation, Facial Recognition, NLP, Topic Modeling, Sentiment Analysis, Named Entity Recognition, Text Classification, Summarization, Anomaly Detection, Other
    * Geospatial Mapping/Analysis
     * potential for Text Classification in next steps.
   * Sustainability, Health, Civic Tech, Voting, Housing, Policing, Budget, Education, Transportation, etc.
-   * Sustainability
-   * Environmental Preservation
 
 *The following questions pertain to the datasets you used in your project.*   
 *Motivation* 
@@ -117,6 +119,8 @@ The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bosto
 * For what purpose was the dataset created? Was there a specific task in mind? Was there a specific gap that needed to be filled? Please provide a description. 
 
   * The datasets were all collected as part of the Canopy Change Assessment: 2014-2019 report comissioned by the Boston Parks and Recreation Department. It consists of metrics aggregated from satellite imagery and leaf-on LiDAR to paint a picture of canopy coverage. The Boston Parks and Recreation Department plans to collect the data every five years to inform the Urban Forest Plan, which focuses on how to prioritize, preserve, and grow tree canopy in Boston. Before this data was collected, there was a gap in knowledge of how much of Boston's tree canopy degrades or grows over time. After the data was collected, the University of Vermont published their tree canopy assessment report, which helped inform policy for the Urban Forest Plan. 
+
+  * The Citywide Land Audit was collected in 2022 to identify areas of city owned land (parcels) that were vacant and could be used to improve the lives of Bostonians. 
 
 *Composition*
 
@@ -136,6 +140,8 @@ The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bosto
     * Tree canopy height in 2014 (CanHghtT1)
     * (Shape_Leng), (ShapeSTArea), (ShapeSTLength) are geospatial features to be used in GIS analysis
 
+   * The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public1) dataset has instances that represent a parcel of land owned by the City of Boston or a quasi-agency. Each row contains columns that describe the location and ownership of the parcels of land.
+
 
 
 * How many instances are there in total (of each type, if appropriate)?  
@@ -146,15 +152,18 @@ The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bosto
 
   * For the Tree_Canopy_Height_Change_2014_to_2019 dataset there are 1048575 instances.
 
+  * The [Citywide Land Audit](https://data.boston.gov/dataset/city-land-audit-public1) dataset has 2940 instances that represent a parcel of land owned by the City of Boston or a quasi-agency. Each row contains columns that describe the location and ownership of the parcels of land.
+
+
 * Does the dataset contain all possible instances or is it a sample (not necessarily random) of instances from a larger set? If the dataset is a sample, then what is the larger set? Is the sample representative of the larger set? If so, please describe how this representativeness was validated/verified. If it is not representative of the larger set, please describe why not (e.g., to cover a more diverse range of instances, because instances were withheld or unavailable). 
 
   * The datasets are a comprehensive collection of all possible area in Boston in 2014 and in 2019. 
 
 * What data does each instance consist of? “Raw” data (e.g., unprocessed text or images) or features? In either case, please provide a description.  
 
-  * Each instance represents a parcel of land and the data includes features either describing the parcel or the tree canopy on the parcels. The [Canopy Change Assessment: Tree Canopy Metrics](https://data.boston.gov/dataset/canopy-change-assessment-tree-canopy-metrics/resource/dc7dd2a1-7b81-48a6-b95f-32f8af8e35d0) contains 72 features. One of the key features is "PID", which is a 10-digit code that is a unique identifier for each parcel. In addition, we used the column "LU_GENERAL", which represent land use, to group tree canopy by land use. To answer the questions "What percentage of Boston's tree canopy is located on public land versus residential parcels?", "How does tree canopy coverage vary across neighborhoods and land use types?", "What are the trends in tree canopy loss or gain (2014-2019) for public and residential areas?", and "Which areas have the highest potential for expanding tree canopy, and are they public or residential spaces?", we used the columns "OWNER" to determine if parcels were owned by the city of Boston or associated agencies by using Fuzzy Matching. Then we classified the rest of the parcels as "non-city owned." We also used the fields **TC_E_A**(Tree canopy existing area), **TC_Land_A** (Land area), **TC_P_A**(Possible area),**TreeCanopy**(2014 total canopy area baseline), **TreeCano_1** (2019 total canopy area), **Gain** (Tree canopy area gain), and **Loss**(Tree canopy area loss).  
+  * Each instance represents a parcel of land and the data includes features either describing the parcel or the tree canopy on the parcels. The [Canopy Change Assessment: Tree Canopy Metrics](https://data.boston.gov/dataset/canopy-change-assessment-tree-canopy-metrics/resource/dc7dd2a1-7b81-48a6-b95f-32f8af8e35d0) contains 72 features. One of the key features is "PID", which is a 10-digit code that is a unique identifier for each parcel. In addition, we used the column "LU_GENERAL", which represent land use, to group tree canopy by land use. To answer the questions "What percentage of Boston's tree canopy is located on public land versus residential parcels?", "How does tree canopy coverage vary across neighborhoods and land use types?", "What are the trends in tree canopy loss or gain (2014-2019) for public and residential areas?", and "Which areas have the highest potential for expanding tree canopy, and are they public or residential spaces?", we used aggregated metrics from the Tree Canopy Metrics and Tree Canopy Change Metrics in order to calculate the percentages of area. We used the parcel ID's from the Citywide Land Audit to classify parcels as  city owned and we classified the rest of the parcels as "non-city owned." We specificaly used key fields, such as **TC_E_A**(Tree canopy existing area), **TC_Land_A** (Land area), **TC_P_A**(Possible area),**TreeCanopy**(2014 total canopy area baseline), **TreeCano_1** (2019 total canopy area), **Gain** (Tree canopy area gain), and **Loss**(Tree canopy area loss), in order to answer our questions. 
 
-  * Columns include: 'FID', 'FID_Boston', 'BOSTON_LAN', 'FID_COB_FY', 'PID', 'CM_ID',
+  * Other Columns include: 'FID', 'FID_Boston', 'BOSTON_LAN', 'FID_COB_FY', 'PID', 'CM_ID',
        'GIS_ID', 'OWNER', 'ST_NUM', 'ST_NAME', 'ST_NAME_SU', 'UNIT_NUM',
        'ZIPCODE', 'LU', 'PTYPE', 'LOTSIZE', 'MAIL_ADDRE', 'MAIL_CS',
        'MAIL_ZIP', 'OWN_OCC', 'GROSS_AREA', 'BLDG_AREA', 'AV_TOTAL', 'AV_LAND',
@@ -167,6 +176,17 @@ The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bosto
        'TC_ID_12', 'VALUE_0', 'TC_E_A', 'TC_Pv_A', 'TC_Land_A', 'TC_Pi_A',
        'TC_P_A', 'TC_E_P', 'TC_Pv_P', 'TC_P_P', 'TC_Pi_P', 'Shape__Area',
        'Shape__Length'
+
+**EJ Communities Dataset**
+
+| Field               | Type   | Description                                                                                          |
+|---------------------|--------|------------------------------------------------------------------------------------------------------|
+| Name                | String | Neighborhood name (e.g., Dorchester, Roxbury)                                                        |
+| Canopy_pct          | Float  | Percent of land area under tree canopy                                                               |
+| SV_key_nb           | Float  | Composite Vulnerability Score: average of LowIncome_pct, LEP_pct, Disability_pct                     |
+| LowIncome_pct       | Float  | % of households below the poverty line                                                               |
+| LEP_pct             | Float  | % of residents with Limited English Proficiency                                                      |
+| Disability_pct      | Float  | % of residents reporting a disability                                                                |
 
 
 * Is there any information missing from individual instances? If so, please provide a description, explaining why this information is missing (e.g., because it was unavailable). This does not include intentionally removed information, but might include redacted text.   
@@ -223,6 +243,14 @@ The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bosto
 | Labeled classes | N/A |
 | Number of labels  | N/A |
 
+**Citywide Land Audit**
+| Size of dataset | 1.1 MB |
+| :---- | :---- |
+| Number of instances | 2940 |
+| Number of fields  | 10 |
+| Labeled classes | N/A |
+| Number of labels  | N/A |
+
 **Tree_Canopy_Height_Change_2014_to_2019**
 | Size of dataset | 319 MB |
 | :---- | :---- |
@@ -246,8 +274,15 @@ The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bosto
 
 * Was any preprocessing/cleaning/labeling of the data done (e.g., discretization or bucketing, tokenization, part-of-speech tagging, SIFT feature extraction, removal of instances, processing of missing values)? If so, please provide a description. If not, you may skip the remaining questions in this section.   
   * We only labeled the polygon representing right-of-way to have a "PID" and "OWNER" equal to "ROW" because we wanted to distinguish it as a its own category outside of city vs non-city owned because there are both publicly and privately owned streets that we cannot distinguish between yet with our given data. 
+  * To utilize the Citywide Land Audit, we used a series of spatial joins and overlay intersections to classify polygons of canopy as city owned and non-city owned. This file is located in the Google Drive](https://drive.google.com/file/d/1PXy_gCq0qiHonpmPounpgT8sgUCpyZrE/view?usp=drive_link).
+
+  * For the Environmental Justice Communities Analysis: 
+    * **Sources**: SVI data from City of Boston; canopy metrics from Boston Open Data  
+    * **Cleaning**: Joined in Python notebook (`EJ_Weber_CT.ipynb`); computed `SV_key_nb`  
+    * **Export**: GeoJSON published in ArcGIS Online; CSV via Data → Export → CSV  
 * Were any transformations applied to the data (e.g., cleaning mismatched values, cleaning missing values, converting data types, data aggregation, dimensionality reduction, joining input sources, redaction or anonymization, etc.)? If so, please provide a description. 
   * The PID needed to be converted to a string data type to ensure that any 10-digit codes that started with a 0 were read in properly. The column 'ownership' was created in order to distinguish between city-owned and non-city owned parcels of land. We classified based on whether the column "OWNER" fit our definition of city-owned, which can be found in our analysis_for_question_1_3_4.ipynb in our Github under question 1.
+  * In order to recalculated the geometry of tree canopy polygons and classify their ownership, we had to perform a series of spatial joins and overlay intersect functions, which can be found in the ArcGIS Pro file in our [Google Drive](https://drive.google.com/file/d/1PXy_gCq0qiHonpmPounpgT8sgUCpyZrE/view?usp=drive_link) Raw Data folder. However, this file was mainly used for preprocessing instead of visualization and can only be opened on a computer that has ArcGIS Pro downloaded, which requires Windows. 
 * Was the “raw” data saved in addition to the preprocessed/cleaned/labeled data (e.g., to support unanticipated future uses)? If so, please provide a link or other access point to the “raw” data, this could be a link to a folder in your GitHub Repo, Spark\! owned Google Drive Folder for this project, or a path on the SCC, etc.  
   * The "raw" data is the same as before: https://github.com/BU-Spark/ds-bcc-tree-canopy/tree/dev/datasets
 * Is the code that was used to preprocess/clean the data available? If so, please provide a link to it (e.g., EDA notebook/EDA script in the GitHub repository). 
@@ -256,13 +291,27 @@ The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bosto
 *Uses* 
 
 * What tasks has the dataset been used for so far? Please provide a description.   
-  * The datasets have been used to distinguish between city-owned and non-city owned parcels of land by using the "OWNER" column to determine if the owner is the City of Boston, or its related agencies. By doing so, we were able to calculate the percentage of tree canopy protected vs not protected by the tree ordinance. In addition, the data was used to calculate tree canopy coverage across neighborhoods and land use types, trends in tree canopy loss or gain (2014-2019) for city-owned and non-city owned areas, areas with the highest potential for expanding tree canopy, and disparities in tree canopy coverage in neighborhoods using the columns provided in the dataset.
+  * The Citywide land audit dataset has been used to distinguish between city-owned and non-city owned parcels of land by considering all Parcel ID'S in the dataset to be owned by the City of Boston, or its related agencies. By doing so, we were able to calculate the percentage of tree canopy protected vs not protected by the tree ordinance. 
+  In addition, the Tree Canopy Metrics and Tree Canopy Change data was used to calculate tree canopy coverage across neighborhoods and land use types, trends in tree canopy loss or gain (2014-2019) for city-owned and non-city owned areas, areas with the highest potential for expanding tree canopy, and disparities in tree canopy coverage in neighborhoods using the columns provided in the dataset. These datasets were also used to calculate tree canopy percentages by neighborhood and by land use, estimate potential areas for expanding tree canopy (categorized by public, private, and ROW) and evaluate inequities in tree canopy coverage across neighborhoods, particularly in marginalized communities using environmental justice (EJ) data.
+
 * What (other) tasks could the dataset be used for?  
   * The dataset can be used to do further analysis by utilizing other datasets that contain information on publicly vs privately owned roads in order to further distinguish all land in Boston that is protected by the ordinance. Population datasets can be combined with these datasets to understand how much tree canopy there is in densely populated areas and determine if there are disparities in tree canopy for communities. 
+  * Understanding trends between 2019 data and the newly collected 2024 LIDAR data that will be published 
+  * Support policy evaluation by assessing how the tree ordinance impacted canopy growth.
+  * Identifying heat islands or air quality issues that could be associated with areas with low canopy for public health initiatives.
+  * Planning urban tree canopy growth projects by highlighting areas of with high potential but low current coverage
+
+
+
 * Is there anything about the composition of the dataset or the way it was collected and preprocessed/cleaned/labeled that might impact future uses?   
   * The tree canopy area is already aggregated in the datasets as US Survey Feet units, but if someone wanted to use a different map units or different aggregation of land parcels from a different year, the geographic metrics would most likely have to be recalculated. For example, existing tree canopy, canopy gain/loss, and potential canopy area would all need to be recalculated if you wanted to use the 2022 version of parcels. 
+  * In the Tree Canopy Metrics Parcels dataset, the ROW (Right of Way) areas were grouped together without detailed ownership breakdowns, affecting fine-grained analysis.
+  * The Tree Canopy Metrics uses 2019 parcels, while Citywide Land Audit data is from 2022, meaning ownership might have changed.
+
 * Are there tasks for which the dataset should not be used? If so, please provide a description.
-  * None
+  * This dataset only covers 2019 tree canopy in depth. While 2014 tree canopy can be observed in the dataset Tree Canopy Change Metrics, the focus of the dataset is to take the absolute difference in tree canopy between 2014 and 2019. This is historical data and does not reflect current canopy.
+  * Due to changes in parcel ownership, the data is an outdated source of truth. 
+  * The dataset is also limited to classifying tree canopy area, but not necessarily the specific center point where trees are physically planted due to the limitations of LIDAR scans. 
 
 
 *Distribution*
@@ -275,7 +324,10 @@ The [Canopy Change Assessment: Parcels Tree Canopy Change Metrics](https://bosto
 * If others want to extend/augment/build on/contribute to the dataset, is there a mechanism for them to do so? If so, please provide a description. 
   * Yes, there are many other datasets that can be used to enrich the analysis that can be done in support of extending the tree ordinance to non-city owned trees, such as data on population density to determine if there are disparities in which residential areas have the most tree canopy coverage. Also, parks highly skew the dataset in neighborhoods like Jamaica Plains, which can be accounted for more in future analysis/questions. 
   
-  * In addition, our method to distinguish between city-owned and non-city owned trees using Fuzzy Matching is not authoratative or comprehensive so more can be done to improve its accuracy. The [Citywide Land Audit](https://www.boston.gov/housing/citywide-land-audit) is the authoritative source, however our team found too many disrepencies between the our 2019 dataset and the 2022 collected data because ownership of parcels appear to have changed. Parcel ID's are also changed yearly so the mapping was slightly different. The dataset is available for download on [Analyze Boston](https://data.boston.gov/dataset/city-land-audit-public1) and preliminary analysis can be found in the python notebook 'analysis_for_question_1_3_4.ipynb'. A future team could work on a methodology to reconcile these differences or build upon the accuracy of the Fuzzy Matching process. 
+  * In addition, our method to distinguish between city-owned and non-city owned trees using the [Citywide Land Audit](https://www.boston.gov/housing/citywide-land-audit) had some short comings as there were parcel differences between the audit and the Tree Canopy Metric datasets, which meant that 34 parcels that were in the audit were not captured in our analysis of tree canopy gain/loss or potential tree canopy area because we didn't have the geospatial datasets to be able to recalculate those metrics. A future team could work on a methodology to reconcile these parcel differences or obtain the raw geospatial files from Analyze Boston to retrace how the Tree Canopy Metrics dataset did calculate gain/loss and potential tree canopy area fields from the LIDAR scans.  
+
+  * Current mechanisms: GitHub repository (with README, DATASETDOC.md, and Jupyter Notebooks) is already set up for version control and collaboration.Others could fork the GitHub repository to add newer data (e.g., post-2019 tree canopy layers). They can correct ownership classifications as updated data becomes available. They could also integrate additional datasets like newer EJ communities files, future canopy assessments, or population data.
+
 
 *Other*
 
